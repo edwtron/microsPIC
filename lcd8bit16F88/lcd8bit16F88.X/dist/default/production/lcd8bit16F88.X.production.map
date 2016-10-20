@@ -1,0 +1,64 @@
+MPLINK 5.08, LINKER
+Linker Map File - Created Tue Oct 18 21:36:04 2016
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                 RES_VECT       code   0x000000    program   0x000002
+                   .cinit    romdata   0x000001    program   0x000004
+                MAIN_PROG       code   0x000003    program   0x0000ce
+.config_2007_BUILD/DEFAULT/PRODUCTION/LCD8BIT       code   0x002007    program   0x000002
+.config_2008_BUILD/DEFAULT/PRODUCTION/LCD8BIT       code   0x002008    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000069      
+                            0x002007    0x002008      
+            108 out of 4359 program addresses used, program memory utilization is 2%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                CONFIGURA   0x000028    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+                  Delay_0   0x000009    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+                 Delay_01   0x000017    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+                 Delay_02   0x000022    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+                   INICIO   0x000068    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+                 RET_10MS   0x000012    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+                  RET_1MS   0x00001d    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+                   RET_1S   0x000003    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+          _MAIN_PROG_0007   0x00000a    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+          _MAIN_PROG_0009   0x00000c    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+          _MAIN_PROG_000C   0x00000f    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+          _MAIN_PROG_0015   0x000018    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+          _MAIN_PROG_0018   0x00001b    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+          _MAIN_PROG_0020   0x000023    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+          _MAIN_PROG_0023   0x000026    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   RET_1S   0x000003    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+                  Delay_0   0x000009    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+          _MAIN_PROG_0007   0x00000a    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+          _MAIN_PROG_0009   0x00000c    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+          _MAIN_PROG_000C   0x00000f    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+                 RET_10MS   0x000012    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+                 Delay_01   0x000017    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+          _MAIN_PROG_0015   0x000018    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+          _MAIN_PROG_0018   0x00001b    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+                  RET_1MS   0x00001d    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+                 Delay_02   0x000022    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+          _MAIN_PROG_0020   0x000023    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+          _MAIN_PROG_0023   0x000026    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+                CONFIGURA   0x000028    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+                   INICIO   0x000068    program     static /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm
+
+

@@ -1,0 +1,4 @@
+Message[302] /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm 84 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm 86 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm 87 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/edwtron/microsPIC/lcd8bit16F88/lcd8bit16F88.X/lcd8bit16F88_8b_simple.asm 88 : Register in operand not in bank 0.  Ensure that bank bits are correct.

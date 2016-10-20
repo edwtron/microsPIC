@@ -1,0 +1,4 @@
+Message[302] /home/edwtron/microsPIC/onOff16F88/onOff16F88.X/onOff16F88_8b_simple.asm 57 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/edwtron/microsPIC/onOff16F88/onOff16F88.X/onOff16F88_8b_simple.asm 59 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/edwtron/microsPIC/onOff16F88/onOff16F88.X/onOff16F88_8b_simple.asm 60 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] /home/edwtron/microsPIC/onOff16F88/onOff16F88.X/onOff16F88_8b_simple.asm 61 : Register in operand not in bank 0.  Ensure that bank bits are correct.

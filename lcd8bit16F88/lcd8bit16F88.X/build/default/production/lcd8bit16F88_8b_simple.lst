@@ -1,0 +1,598 @@
+MPASM 5.68  /HOME/EDWTRON/MICROSPIC/LCD8BIT1   10-18-2016  21:36:03         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ; TODO INSERT CONFIG CODE HERE USING CONFIG BITS GENERATOR
+                      00002 
+                      00003     
+                      00004     #include "p16f88.inc"
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ; Build date : May 15 2016
+                      00005 ;  MPASM PIC16F88 processor include
+                      00006 ; 
+                      00007 ;  (c) Copyright 1999-2016 Microchip Technology, All rights reserved
+                      00008 ;==========================================================================
+                      00009 
+                      00550         LIST
+                      00005 
+                      00006 ; CONFIG1
+                      00007 ; __config 0xFF50
+2007   3F50           00008     __CONFIG _CONFIG1, _FOSC_INTOSCIO & _WDTE_OFF & _PWRTE_ON & _MCLRE_OFF & _BOREN_ON & _LVP_OFF & _CPD
+                            _OFF & _WRT_OFF & _CCPMX_RB0 & _CP_OFF
+                      00009 ; CONFIG2
+                      00010 ; __config 0xFFFC
+2008   3FFC           00011     __CONFIG _CONFIG2, _FCMEN_OFF & _IESO_OFF
+                      00012     
+                      00013     cblock  0X20
+  00000020            00014         d1
+  00000021            00015         d2
+  00000022            00016         d3
+                      00017         endc
+                      00018     
+                      00019 RES_VECT  CODE    0x0000            ; processor reset vector
+                      00020   
+0000   2???           00021     GOTO    CONFIGURA                   ; go to beginning of program
+                      00022 
+                      00023 ; TODO ADD INTERRUPTS HERE IF USED
+                      00024 
+                      00025 MAIN_PROG CODE                      ; let linker place main program
+                      00026  
+                      00027  
+0000                  00028 RET_1S                  ;999997 cycles
+0000   3008           00029         movlw   0x08
+0001   00A0           00030         movwf   d1
+0002   302F           00031         movlw   0x2F
+0003   00A1           00032         movwf   d2
+0004   3003           00033         movlw   0x03
+0005   00A2           00034         movwf   d3
+0006                  00035 Delay_0
+0006   0BA0           00036         decfsz  d1, f
+0007   2???           00037         goto    $+2
+0008   0BA1           00038         decfsz  d2, f
+0009   2???           00039         goto    $+2
+000A   0BA2           00040         decfsz  d3, f
+000B   2???           00041         goto    Delay_0
+                      00042 
+MPASM 5.68  /HOME/EDWTRON/MICROSPIC/LCD8BIT1   10-18-2016  21:36:03         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00043                         ;3 cycles
+000C   2???           00044         goto    $+1
+000D   0000           00045         nop
+                      00046 
+000E   0008           00047         RETURN
+                      00048         
+                      00049         
+000F   0000           00050 RET_10MS NOP            ;9998 cycles
+0010   30CF           00051         movlw   0xCF
+0011   00A0           00052         movwf   d1
+0012   3008           00053         movlw   0x08
+0013   00A1           00054         movwf   d2
+0014                  00055 Delay_01
+0014   0BA0           00056         decfsz  d1, f
+0015   2???           00057         goto    $+2
+0016   0BA1           00058         decfsz  d2, f
+0017   2???           00059         goto    Delay_01
+                      00060 
+                      00061                         ;2 cycles
+0018   2???           00062         goto    $+1
+0019   0008           00063         RETURN
+                      00064         
+001A   0000           00065 RET_1MS NOP             ;998 cycles
+001B   30C7           00066         movlw   0xC7
+001C   00A0           00067         movwf   d1
+001D   3001           00068         movlw   0x01
+001E   00A1           00069         movwf   d2
+001F                  00070 Delay_02
+001F   0BA0           00071         decfsz  d1, f
+0020   2???           00072         goto    $+2
+0021   0BA1           00073         decfsz  d2, f
+0022   2???           00074         goto    Delay_02
+                      00075 
+                      00076                         ;2 cycles
+0023   2???           00077         goto    $+1
+                      00078         
+0024   0008           00079         RETURN
+                      00080         
+                      00081 
+0025   0000           00082 CONFIGURA       NOP
+0026   1683 1303      00083     BANKSEL    ADCON1
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0028   019B           00084     CLRF           ANSEL
+0029   306C           00085     MOVLW B'01101100'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+002A   008F           00086     MOVWF OSCCON
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+002B   0185           00087     CLRF          TRISA
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+002C   0186           00088     CLRF          TRISB
+                      00089  
+002D   1283 1303      00090     BANKSEL    PORTB
+002F   0185           00091     CLRF           PORTA
+MPASM 5.68  /HOME/EDWTRON/MICROSPIC/LCD8BIT1   10-18-2016  21:36:03         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0030   0186           00092     CLRF           PORTB   
+                      00093  
+0031   2???           00094     CALL        RET_1MS
+0032   1005           00095     BCF          PORTA,0    ;RS = 0
+0033   1085           00096     BCF          PORTA,1    ;E = 0
+0034   3038           00097     MOVLW    B'00111000'    ;8 BITS 2 LINEAS 7X5
+0035   0086           00098     MOVWF    PORTB   
+0036   1005           00099     BCF           PORTA,0    ;RS=0
+0037   1485           00100     BSF           PORTA,1    ;E=1 HABILITO ESCRITURA
+0038   2???           00101     CALL         RET_1MS
+0039   1085           00102     BCF          PORTA,1    ;E = 0
+003A   2???           00103     CALL        RET_1MS
+                      00104    
+003B   300F           00105     MOVLW    B'00001111'    ;ON LCD, ON CURSOR, ON INTER   
+003C   0086           00106     MOVWF    PORTB   
+003D   1005           00107     BCF           PORTA,0    ;RS=0
+003E   1485           00108     BSF           PORTA,1    ;E=1 HABILITO ESCRITURA
+003F   2???           00109     CALL         RET_1MS
+0040   1085           00110     BCF           PORTA,1    ;E = 0
+0041   2???           00111     CALL        RET_1MS
+                      00112 
+                      00113    
+                      00114 
+0042   3045           00115     MOVLW    A'E'    ; Cargo el ASCII de la E
+0043   0086           00116     MOVWF    PORTB    ;Envio la E al puerto
+0044   1405           00117     BSF           PORTA,0
+0045   1485           00118     BSF           PORTA,1
+0046   2???           00119     CALL        RET_10MS
+0047   1085           00120     BCF          PORTA,1
+0048   2???           00121     CALL       RET_10MS
+                      00122     
+0049   3064           00123     MOVLW    A'd'    ; Cargo el ASCII de la E
+004A   0086           00124     MOVWF    PORTB    ;Envio la E al puerto
+004B   1405           00125     BSF           PORTA,0
+004C   1485           00126     BSF           PORTA,1
+004D   2???           00127     CALL        RET_10MS
+004E   1085           00128     BCF          PORTA,1
+004F   2???           00129     CALL       RET_10MS
+                      00130     
+0050   3077           00131     MOVLW    A'w'    ; Cargo el ASCII de la E
+0051   0086           00132     MOVWF    PORTB    ;Envio la E al puerto
+0052   1405           00133     BSF           PORTA,0
+0053   1485           00134     BSF           PORTA,1
+0054   2???           00135     CALL        RET_10MS
+0055   1085           00136     BCF          PORTA,1
+0056   2???           00137     CALL       RET_10MS
+                      00138     
+0057   3069           00139     MOVLW    A'i'    ; Cargo el ASCII de la E
+0058   0086           00140     MOVWF    PORTB    ;Envio la E al puerto
+0059   1405           00141     BSF           PORTA,0
+005A   1485           00142     BSF           PORTA,1
+005B   2???           00143     CALL        RET_10MS
+005C   1085           00144     BCF          PORTA,1
+MPASM 5.68  /HOME/EDWTRON/MICROSPIC/LCD8BIT1   10-18-2016  21:36:03         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+005D   2???           00145     CALL       RET_10MS
+                      00146     
+005E   306E           00147     MOVLW    A'n'    ; Cargo el ASCII de la E
+005F   0086           00148     MOVWF    PORTB    ;Envio la E al puerto
+0060   1405           00149     BSF           PORTA,0
+0061   1485           00150     BSF           PORTA,1
+0062   2???           00151     CALL        RET_10MS
+0063   1085           00152     BCF          PORTA,1
+0064   2???           00153     CALL       RET_10MS
+                      00154 
+0065   0000           00155 INICIO        NOP
+                      00156     
+0066   2???           00157     GOTO     INICIO   
+                      00158 
+                      00159    
+3F50 3FFC             00160     END
+MPASM 5.68  /HOME/EDWTRON/MICROSPIC/LCD8BIT1   10-18-2016  21:36:03         PAGE  5
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000006
+ADCS1                             00000007
+ADCS2                             00000006
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ANS0                              00000000
+ANS1                              00000001
+ANS2                              00000002
+ANS3                              00000003
+ANS4                              00000004
+ANS5                              00000005
+ANS6                              00000006
+ANSEL                             0000009B
+BF                                00000000
+BRGH                              00000002
+C                                 00000000
+C1INV                             00000004
+C1OUT                             00000006
+C2INV                             00000005
+C2OUT                             00000007
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCPR1                             00000015
+CCPR1H                            00000016
+CCPR1L                            00000015
+CHS0                              00000003
+CHS1                              00000004
+CHS2                              00000005
+CIS                               00000003
+CKE                               00000006
+CKP                               00000004
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             0000009C
+CMIE                              00000006
+CMIF                              00000006
+CONFIGURA                         00000025
+CREN                              00000004
+MPASM 5.68  /HOME/EDWTRON/MICROSPIC/LCD8BIT1   10-18-2016  21:36:03         PAGE  6
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CSRC                              00000007
+CVR0                              00000000
+CVR1                              00000001
+CVR2                              00000002
+CVR3                              00000003
+CVRCON                            0000009D
+CVREN                             00000007
+CVROE                             00000006
+CVRR                              00000005
+D                                 00000005
+DATA_ADDRESS                      00000005
+DC                                00000001
+D_A                               00000005
+D_NOT_A                           00000005
+Delay_0                           00000006
+Delay_01                          00000014
+Delay_02                          0000001F
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+F                                 00000001
+FERR                              00000002
+FREE                              00000004
+FSR                               00000004
+GIE                               00000007
+GO                                00000002
+GO_DONE                           00000002
+GO_NOT_DONE                       00000002
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+INDF                              00000000
+INICIO                            00000065
+INT0IE                            00000004
+INT0IF                            00000001
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IOFS                              00000002
+IRCF0                             00000004
+IRCF1                             00000005
+IRCF2                             00000006
+IRP                               00000007
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+MPASM 5.68  /HOME/EDWTRON/MICROSPIC/LCD8BIT1   10-18-2016  21:36:03         PAGE  7
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+NOT_BO                            00000000
+NOT_BOR                           00000000
+NOT_DONE                          00000002
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_RC8                           00000006
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_TX8                           00000006
+NOT_W                             00000002
+NOT_WRITE                         00000002
+OERR                              00000001
+OPTION_REG                        00000081
+OSCCON                            0000008F
+OSCTUNE                           00000090
+OSFIE                             00000007
+OSFIF                             00000007
+OSTS                              00000003
+P                                 00000004
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+PORTA                             00000005
+PORTB                             00000006
+PR2                               00000092
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RA6                               00000006
+RA7                               00000007
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+MPASM 5.68  /HOME/EDWTRON/MICROSPIC/LCD8BIT1   10-18-2016  21:36:03         PAGE  8
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RBIF                              00000000
+RC8_9                             00000006
+RC9                               00000006
+RCD8                              00000000
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+READ_WRITE                        00000002
+RET_10MS                          0000000F
+RET_1MS                           0000001A
+RET_1S                            00000000
+RP0                               00000005
+RP1                               00000006
+RX9                               00000006
+RX9D                              00000000
+R_NOT_W                           00000002
+R_W                               00000002
+S                                 00000003
+SCS0                              00000000
+SCS1                              00000001
+SMP                               00000007
+SPBRG                             00000099
+SPEN                              00000007
+SREN                              00000005
+SSPADD                            00000093
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPOV                             00000006
+SSPSTAT                           00000094
+STATUS                            00000003
+SWDTE                             00000000
+SWDTEN                            00000000
+SYNC                              00000004
+T0CS                              00000005
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1INSYNC                          00000002
+T1OSCEN                           00000003
+T1RUN                             00000006
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+MPASM 5.68  /HOME/EDWTRON/MICROSPIC/LCD8BIT1   10-18-2016  21:36:03         PAGE  9
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISA6                            00000006
+TRISA7                            00000007
+TRISB                             00000086
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRMT                              00000001
+TUN0                              00000000
+TUN1                              00000001
+TUN2                              00000002
+TUN3                              00000003
+TUN4                              00000004
+TUN5                              00000005
+TX8_9                             00000006
+TX9                               00000006
+TX9D                              00000000
+TXD8                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+UA                                00000001
+MPASM 5.68  /HOME/EDWTRON/MICROSPIC/LCD8BIT1   10-18-2016  21:36:03         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+VCFG0                             00000004
+VCFG1                             00000005
+W                                 00000000
+WCOL                              00000007
+WDTCON                            00000105
+WDTPS0                            00000001
+WDTPS1                            00000002
+WDTPS2                            00000003
+WDTPS3                            00000004
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_BOREN_OFF                        00003FBF
+_BOREN_ON                         00003FFF
+_CCP1_RB0                         00003FFF
+_CCP1_RB3                         00002FFF
+_CCPMX_RB0                        00003FFF
+_CCPMX_RB3                        00002FFF
+_CONFIG1                          00002007
+_CONFIG2                          00002008
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003EFF
+_CP_ALL                           00001FFF
+_CP_OFF                           00003FFF
+_CP_ON                            00001FFF
+_DEBUG_OFF                        00003FFF
+_DEBUG_ON                         000037FF
+_DEVID1                           00002006
+_EXTCLK                           00003FEF
+_EXTRC_CLKOUT                     00003FFF
+_EXTRC_IO                         00003FFE
+_FCMEN_OFF                        00003FFE
+_FCMEN_ON                         00003FFF
+_FOSC_EC                          00003FEF
+_FOSC_EXTRCCLK                    00003FFF
+_FOSC_EXTRCIO                     00003FFE
+_FOSC_HS                          00003FEE
+_FOSC_INTOSCCLK                   00003FFD
+_FOSC_INTOSCIO                    00003FFC
+_FOSC_LP                          00003FEC
+_FOSC_XT                          00003FED
+_HS_OSC                           00003FEE
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_IESO_OFF                         00003FFD
+_IESO_ON                          00003FFF
+_INTRC_CLKOUT                     00003FFD
+_INTRC_IO                         00003FFC
+MPASM 5.68  /HOME/EDWTRON/MICROSPIC/LCD8BIT1   10-18-2016  21:36:03         PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_LP_OSC                           00003FEC
+_LVP_OFF                          00003F7F
+_LVP_ON                           00003FFF
+_MAIN_PROG_0007                   00000007
+_MAIN_PROG_0009                   00000009
+_MAIN_PROG_000C                   0000000C
+_MAIN_PROG_0015                   00000015
+_MAIN_PROG_0018                   00000018
+_MAIN_PROG_0020                   00000020
+_MAIN_PROG_0023                   00000023
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_MCLR_OFF                         00003FDF
+_MCLR_ON                          00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_WDTE_OFF                         00003FFB
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_WRT_2048                         00003BFF
+_WRT_256                          00003DFF
+_WRT_ALL                          000039FF
+_WRT_OFF                          00003FFF
+_WRT_PROTECT_2048                 00003BFF
+_WRT_PROTECT_256                  00003DFF
+_WRT_PROTECT_ALL                  000039FF
+_WRT_PROTECT_OFF                  00003FFF
+_XT_OSC                           00003FED
+__16F88                           00000001
+d1                                00000020
+d2                                00000021
+d3                                00000022
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     4 reported,     0 suppressed
+
+
