@@ -6,7 +6,6 @@
  */
 #define _XTAL_FREQ 8000000      // Indicamos a que frecuencia de reloj esta funcionando el micro
 
-
 #include <xc.h>
 
 
